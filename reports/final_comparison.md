@@ -134,6 +134,35 @@ multi-task backbone with a dominant lag-temperature signal redistributes
 attribution, not a data or leakage issue (both models were checked for
 leakage independently — see notebook 01 and `phase2_design.md` §2).
 
+## 7b. Augmentation ablation: does jittering actually help? No.
+
+`phase2_design.md` §5 proposed Gaussian-noise jittering on the scaled training
+sequences as a regularizer. Tested directly in `notebooks/07_augmentation_ablation.ipynb`
+(identical tuned architecture and budget, 3x effective training size via 2 noisy
+copies per real row, sigma=0.05, targets left unmodified, test set untouched):
+
+| Target | No augmentation (test R²) | Jittered (test R²) | Delta |
+|---|---|---|---|
+| DBT | 0.715 | 0.655 | −0.060 (hurt) |
+| WBT | 0.664 | 0.612 | −0.052 (hurt) |
+
+Jittering **hurt** test performance on both targets in this run. At n=210, diluting
+the training set with noisy duplicates apparently cost more real signal than it
+bought in regularization. Reported as the actual finding — the design doc's honesty
+requirement about augmentation ("it can help regularize training, but should not be
+presented as creating new real observations") turned out to need extending to "and
+here, empirically, it didn't even help regularize."
+
+**A second, independent honesty note from the same experiment**: the "no
+augmentation" run in notebook 07 re-trains the *identical* tuned architecture from
+notebook 04 and gets a different DBT test R² (0.715 vs. notebook 04's 0.662) —
+purely from run-to-run stochastic initialization, since both runs call
+`tf.random.set_seed(42)` but consume the global RNG stream differently depending
+on what ran before them in-process. At n=210 with a ~3,000-parameter network,
+single-run test metrics carry real variance; every number in this report should be
+read as "one run's outcome," not a tight point estimate. This is disclosed rather
+than smoothed over by, e.g., quietly re-running until a favorable seed appeared.
+
 ## 8. Where DL helped, where it didn't — the honest takeaway
 
 **Helped:**

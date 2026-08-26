@@ -46,13 +46,33 @@ Both established during exploratory analysis, before any modeling:
 ## Project layout
 
 ```
-data/raw/            Original dataset, untouched (FINAL_DATASET_allpara.xlsx)
+data/raw/             Original dataset, untouched (FINAL_DATASET_allpara.xlsx)
 data/processed/       Deterministic pipeline outputs (git-ignored — regenerate from notebooks)
 notebooks/            Numbered, runnable notebooks — the reproducibility trail
 src/                  Reusable pipeline code imported by the notebooks
 reports/              Written findings: JD analysis, design rationale, final comparison
-models/               Saved best-checkpoint models (small artifacts only)
+models/checkpoints/   Saved best-epoch models (git-ignored — regenerate by re-running notebooks)
 ```
+
+### Notebooks (run in order)
+
+| # | Notebook | Produces |
+|---|---|---|
+| 01 | `01_eda.ipynb` | Burst-structure discovery, leakage checks, target/feature distributions |
+| 02 | `02_preprocessing_windowing.ipynb` | Chronological burst-aware split, flat + sequence feature representations |
+| 03 | `03_classical_baselines.ipynb` | Internship's model roster refit on this project's split (the DL yardstick) |
+| 04 | `04_cnn_lstm.ipynb` | LSTM/CNN/CNN-LSTM ablation, optimizer comparison, Keras Tuner search |
+| 05 | `05_classification_subtask.ipynb` | Auxiliary heat-stress-day classifier (SMOTE/ADASYN, scoped) |
+| 06 | `06_interpretability.ipynb` | SHAP on the tuned CNN-LSTM vs. the internship's SHAP findings |
+| 07 | `07_augmentation_ablation.ipynb` | Tests the jittering-augmentation proposal empirically (helps / doesn't) |
+
+## Results
+
+Full write-up: [`reports/final_comparison.md`](reports/final_comparison.md). Headline:
+the tuned CNN-LSTM beats the internship's own DBT benchmark (R²=0.662 vs. 0.621) but
+not classical baselines refit on this project's stricter split; on WBT it beats
+neither. Reported as the finding, not adjusted to look better — see the report for
+the full ablation, optimizer, overfitting, and interpretability breakdown.
 
 ## Environment
 

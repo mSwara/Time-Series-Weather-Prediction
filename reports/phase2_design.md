@@ -127,13 +127,19 @@ a flat model has to infer (or fail to) from column position.
 ## 5. Synthetic data / augmentation — what it can and cannot do here
 
 For the regression task: light **jittering (Gaussian noise injection)** on the
-scaled training sequences is used as a regularizer during training (comparable in
-spirit to how Dropout regularizes activations, applied instead to inputs). This is
-explicitly *not* presented as creating new real observations — it cannot add
-information the physical system didn't produce, only discourage the small network
-from memorizing exact training points. Block bootstrap of whole bursts was
-considered as an alternative/addition; jittering was judged sufficient and more
-transparent for a first version, and is called out here as the honest choice made.
+scaled training sequences was tried as a regularizer during training (comparable
+in spirit to how Dropout regularizes activations, applied instead to inputs).
+Tested empirically in `notebooks/07_augmentation_ablation.ipynb` (sigma=0.05,
+3x effective training size, identical tuned architecture and budget with vs.
+without): **it hurt test R² on both targets** (DBT 0.715→0.655, WBT 0.664→0.612).
+Reported as the actual result, not the hoped-for one — at n=210, adding noisy
+duplicates apparently diluted the (already scarce) real signal faster than it
+regularized against overfitting. This is itself the honest answer to "what can
+augmentation do for a physical regression problem at this scale": here, nothing
+positive, and the design doc's job is to report that, not paper over it. Block
+bootstrap of whole bursts was considered as an alternative and not tried, given
+the jittering result; a future iteration would be a more natural next step than
+tuning jittering's noise level further.
 
 **SMOTE/ADASYN are not applied to the regression target.** They are class-imbalance
 resampling techniques for classification and have no valid meaning against a
