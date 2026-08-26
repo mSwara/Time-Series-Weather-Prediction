@@ -1,0 +1,24 @@
+# Core
+numpy
+pandas
+openpyxl
+scipy
+
+# Classical ML (baselines, matched against the internship's models)
+scikit-learn
+
+# Deep learning
+tensorflow
+keras-tuner
+
+# Class-imbalance handling (auxiliary heat-stress classification sub-task only)
+imbalanced-learn
+
+# Interpretability
+shap
+
+# Viz / notebooks
+matplotlib
+seaborn
+nbformat
+ipykernel

@@ -1,0 +1,30 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# Keras Tuner search directories (large, fully reproducible from notebook)
+keras_tuner_dir/
+kt_dir/
+
+# Large trained artifacts (kept locally; small final models may be added explicitly)
+models/*.h5
+models/*.keras
+models/checkpoints/
+
+# MLflow / experiment tracking local stores
+mlruns/
+mlartifacts/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated/derived data (regenerate deterministically from notebooks in src/)
+data/processed/*.csv
+data/processed/*.npz
+data/processed/*.parquet
