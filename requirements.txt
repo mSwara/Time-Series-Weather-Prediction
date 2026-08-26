@@ -10,6 +10,7 @@ scikit-learn
 # Deep learning
 tensorflow
 keras-tuner
+tensorboard  # required internally by keras-tuner's trial logging, even without using TensorBoard directly
 
 # Class-imbalance handling (auxiliary heat-stress classification sub-task only)
 imbalanced-learn
