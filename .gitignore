@@ -28,3 +28,4 @@ Thumbs.db
 data/processed/*.csv
 data/processed/*.npz
 data/processed/*.parquet
+data/processed/*.pkl

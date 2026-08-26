@@ -33,6 +33,13 @@ STATIC_FEATURE_COLS = [
 TARGET_COLS = ["dbt", "wbt"]
 
 
+FLAT_FEATURE_COLS = STATIC_FEATURE_COLS + ["Hr"] + LAG_COLS
+"""The internship's final feature set (9 base predictors + 4 lag temperatures),
+reproduced here so the classical-ML baselines in notebooks/03 are refit on
+*this* project's chronological split for a fair, apples-to-apples rematch
+against the internship's own numbers (which used a random 80:20 split)."""
+
+
 def load_raw(path: Path | str = RAW_PATH) -> pd.DataFrame:
     """Load the raw dataset, sorted chronologically, with a clean RangeIndex.
 
