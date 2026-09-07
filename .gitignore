@@ -7,12 +7,14 @@ env/
 
 # Keras Tuner search directories (large, fully reproducible from notebook)
 keras_tuner_dir/
+keras_tuner_dir_large/
 kt_dir/
 
 # Large trained artifacts (kept locally; small final models may be added explicitly)
 models/*.h5
 models/*.keras
 models/checkpoints/
+models/checkpoints_large/
 
 # MLflow / experiment tracking local stores
 mlruns/
