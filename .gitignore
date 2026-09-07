@@ -33,3 +33,4 @@ data/processed/*.pkl
 
 # Large-scale extension: keep the clean CSV, not the raw API JSON
 data/raw_large/*.json
+data/processed_large/
