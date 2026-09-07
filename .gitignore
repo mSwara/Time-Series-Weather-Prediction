@@ -29,3 +29,7 @@ data/processed/*.csv
 data/processed/*.npz
 data/processed/*.parquet
 data/processed/*.pkl
+.tools/
+
+# Large-scale extension: keep the clean CSV, not the raw API JSON
+data/raw_large/*.json

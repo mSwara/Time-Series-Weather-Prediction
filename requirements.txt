@@ -3,6 +3,7 @@ numpy
 pandas
 openpyxl
 scipy
+requests  # for src/fetch_large_data.py (large-scale extension, notebooks 08+)
 
 # Classical ML (baselines, matched against the internship's models)
 scikit-learn
