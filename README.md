@@ -24,7 +24,7 @@ a naive persistence baseline to confirm the model adds genuine value.
 | MAPE | 2.414% | **2.204%** |
 | Walk-forward CV R² (5 folds) | — | mean 0.969, std 0.001 |
 
-**Honest read**: temperature has strong day-to-day persistence, so a naive
+Temperature has strong day-to-day persistence, so a naive
 "tomorrow = today" baseline already scores R²=0.96 for free. The LSTM adds
 real, measured value on top of it (10% lower RMSE, 7% lower MAE) — a genuine
 but modest improvement, reported as-is rather than inflated. Full numbers,
@@ -135,9 +135,3 @@ py -3.10 -m venv .venv
 Run notebooks with the `.venv` kernel, in numeric order (08 → 09 → 10) — each
 is a standalone, re-runnable record of one pipeline stage.
 
-## A note on scope
-
-This repository also contains an earlier, smaller-scale study (300 rows,
-notebooks 01–07) on a related but distinct dataset and problem framing — see
-its own write-up in [`reports/final_comparison.md`](reports/final_comparison.md)
-if relevant. This README documents the large-scale LSTM project specifically.
